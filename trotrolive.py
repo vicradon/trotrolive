@@ -124,15 +124,20 @@ def login():
 def search():
     src = request.form['src']
     dest = request.form['dest']
-    un = str('_')
-    srcdest = str(src)+str(un)+str(dest)
-    check = fares.query.filter_by(srcdest = srcdest).all()
+    if src == dest:
+        same = 'You chose the same location twice!'
+        return render_template('index.html', same=same)
+    else:
+        un = str('_')
+        srcdest = str(src)+str(un)+str(dest)
+        check = fares.query.filter_by(srcdest = srcdest).all()
+
     if check != []:
         return render_template('index.html', 
                                             singlefare = check , 
                                             src=src, 
                                             dest=dest )
-    #print(check)
+
     else:
         srcdest = str(dest)+str(un)+str(src)
         check = fares.query.filter_by(srcdest = srcdest).all()

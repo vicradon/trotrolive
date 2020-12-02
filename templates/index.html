@@ -78,6 +78,10 @@
 <div class="mainbanner"> 
     <img src="{{ url_for('static', filename='images/logo.jpg') }}" class="banner">
     <br>
+    <div>
+      <h3>{{same}}</h3>
+    </div>
+    <br>
     <div>  
       {% for singlefar in singlefare %} 
       <h3>Fare from {{ src }} to {{ dest }} is: </h3>         
