@@ -154,9 +154,14 @@ def search():
 def searchm():
     src = request.form['src']
     dest = request.form['dest']
-    un = str('_')
-    srcdest = str(src)+str(un)+str(dest)
-    check = fares.query.filter_by(srcdest = srcdest).all()
+    if src == dest:
+        same = 'You chose the same location twice!'
+        return render_template('member.html', same=same)
+    else:
+        un = str('_')
+        srcdest = str(src)+str(un)+str(dest)
+        check = fares.query.filter_by(srcdest = srcdest).all()
+
     if check != []:
         return render_template('member.html', 
                                             singlefare = check , 

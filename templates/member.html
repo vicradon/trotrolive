@@ -52,6 +52,11 @@
 
       <div class="mainbanner">
 <img src="{{ url_for('static', filename='images/logo.jpg') }}" class="banner">
+
+         <br>
+         <div>
+            <h3>{{same}}</h3>
+         </div>
 {% with messages = get_flashed_messages() %}
      {% if messages %}
         <ul>
