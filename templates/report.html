@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <link rel="stylesheet" href={{ url_for('static', filename='style.css') }}>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Report</title>
+</head>
+<body>
+   <header>
+      <div class="toptitle">
+         <ul>
+       <li>  <img class="banner2" src="{{ url_for('static', filename='images/logomod.png') }}"></li>
+    
+       <li><h2 class ="maintext" >Trotro Live</h2></li>
+    </ul>
+ </div>
+ <div class="menubar">
+   <ul>
+      <li class="active"><a href="/">Home</a></li>
+      <li><a href="#">About Us</a>
+      <div class="submenu">
+         <ul>
+            <li><a href="/company">Company Info</a></li>
+            <li><a href="/team">Meet The Team</a></li>
+         </ul>
+      </div>
+   </li>
+      <li><a href="/member">My Page</a></li>
+      <li><a href="#">Customer Service</a>
+      <div class="submenu">
+         <ul>
+            <li><a href="/team">Chat Us</a></li>
+            <li><a href="/report">Report Missing Items</a></li>
+         </ul>
+      </div>
+   </li>
+   </ul>
+ </div>
+  <div class="mainbanner"> 
+  <img src="{{ url_for('static', filename='images/logo.jpg') }}" class="banner">
+  </div>
+    </header>
+    <div class="formsss">
+      <form action="#" method="POST">
+        <div>
+          <label>First Name</label>
+          <input type="text" name="firstname">
+        </div>
+        <br>
+        <div>
+          <label>Last Name</label>
+          <input type="text" name="lastname">
+        </div>
+        <br>
+        <div>
+          <label>Item Description</label>
+          <input type="text" name="itemdescription">
+        </div>
+        <br>
+        <div>
+          <label>TRIP DETAILS : </label>
+          
+          <label>From</label>
+          <input type="text" name="from">
+          <label>To</label>
+          <input type="text" name="to">
+        </div>
+        <br>
+        
+        <input type="submit" value="Submit Report">
+        <br><br><br>
+      </form>
+    </div> 
+   
+
+    <footer> 
+      
+    <p>Copyright &copy; 2020 Trotro Live Ltd . <a href="/company">Company Information</a></p>
+    <p2><a href="/privacy">Privacy Terms</a></p2>
+   
+   </footer>
+</body>
+</html>

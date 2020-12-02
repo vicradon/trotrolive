@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+</head>
+<body>
+  <header>
+    <div class="toptitle">
+      <ul>
+    <li>  <img class="banner2" src="{{ url_for('static', filename='images/logomod.png') }}"></li>
+ 
+    <li><h2 class ="maintext" >Trotro Live</h2></li>
+ 
+</ul>
+</div>
+      
+<div class="menubar">
+  <ul>
+     <li class="active"><a href="/">Home</a></li>
+     <li><a href="#">About Us</a>
+     <div class="submenu">
+        <ul>
+           <li><a href="/company">Company Info</a></li>
+           <li><a href="/team">Meet The Team</a></li>
+           <li><a href="/policies">Policies</a></li>
+        </ul>
+     </div>
+  </li>
+     <li><a href="#">Travel Tips</a>
+     <div class="submenu">
+        <ul>
+           <li><a href="/travel">General Travel</a></li>
+           <li><a href="/health">Health Concerns</a></li>
+           <li><a href="/safety">Safety Measures</a></li>
+           <li><a href="/faqs">FAQs</a></li>
+        </ul>
+     </div>
+  </li>
+     <li><a href="#">Customer Service</a>
+     <div class="submenu">
+        <ul>
+           <li><a href="/team">Chat Us</a></li>
+           <li><a href="/report">Report Missing Items</a></li>
+        </ul>
+     </div>
+  </li>
+  </ul>
+</div>
+
+
+<div class="mainbanner"> 
+  <img src="{{ url_for('static', filename='images/logo.jpg') }}" class="banner">
+  </div>
+  </header>
+
+  <div class="formsss">
+    {% if error %}
+         <p><strong>Error:</strong> {{ error }}
+    {% endif %}
+    <form action="signup" method="POST" name="form">
+      <div>
+        <label>Email</label>
+        <input type="email" name="email" id="email">
+      </div>
+      <br>
+      <div>
+        <label>First Name</label>
+        <input type="text" name="fname" id="fname">
+      </div>
+      <br>
+      <div>
+        <label>Last Name</label>
+        <input type="text" name="lname" id="lname">
+      </div>
+      <br>
+      <div>
+        <label>Gender</label>
+        <select name="gender"> 
+          <option value="male" id="gender">Male</option>
+          <option value="female" id="gender">Female</option>
+          <option value="other" id="gender">Other</option>
+        </select>
+      </div>
+      <br>
+
+      <div>
+        <label>Date of Birth</label>
+        <input type="date" name="dob" id="dob">
+      </div>
+      <br>
+      <div>
+        <label>Set Password</label>
+        <input type="password" name="password" id="password">
+      </div>
+      <br>
+      <div>
+        <label>Repeat Password</label>
+        <input type="password" name="repassword" id="repassword">
+      </div>
+      <br>
+      <input type="submit" value="Submit">
+    </form>
+</div>
+  <br><br><br>
+
+  <footer>
+    
+    <p>Copyright &copy; 2020 Trotro Live Ltd . <a href="/company">Company Information</a></p>
+    <p2><a href="/privacy">Privacy Terms</a></p2>
+  </footer>
+</body>
+</html>

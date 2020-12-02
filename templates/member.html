@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Member</title>
+</head>
+<body>
+  <header>
+   <div class="toptitle">
+      <ul>
+    <li>  <img class="banner2" src="{{ url_for('static', filename='images/logomod.png') }}"></li>
+ 
+    <li><h2 class ="maintext" >Trotro Live</h2></li>
+ 
+</ul>
+</div>
+<div class="menubar">
+   <ul>
+      <li class="active"><a href="/">Home</a></li>
+      
+      <li><a href="#">About Us</a>
+      <div class="submenu">
+         <ul>
+            <li><a href="/company">Company Info</a></li>
+            <li><a href="/team">Meet The Team</a></li>
+            <li><a href="/policies">Policies</a></li>
+         </ul>
+      </div>
+   </li>
+      <li><a href="/suggest">Suggest Fare</a></li>
+      <li><a href="#">Customer Service</a>
+      <div class="submenu">
+         <ul>
+            <li><a href="/team">Chat Us</a></li>
+            <li><a href="/report">Report Missing Items</a></li>
+         </ul>
+      </div>
+   </li>
+         <div class="logout">
+            <li class="active"><a href="/logout">Log Out</a></li>
+            <li></li>
+         </div>
+</ul>
+</div>
+    
+      
+          
+
+ 
+
+      <div class="mainbanner">
+<img src="{{ url_for('static', filename='images/logo.jpg') }}" class="banner">
+{% with messages = get_flashed_messages() %}
+     {% if messages %}
+        <ul>
+           {% for message in messages %}
+           <li>{{ message }}</li>
+           {% endfor %}
+        </ul>
+     {% endif %}
+{% endwith %}
+
+<br>
+
+    <div>  
+      {% for singlefar in singlefare %} 
+      Fare from {{ src }} to {{ dest }} is:         
+      <h2>GH₵ {{ singlefar.fare }}0 p  {{ singlefar.transit }}</h2>
+      {% endfor %}
+    </div>
+</div>
+  </header>
+
+
+<br><br><br><br><br><br><br>
+<br><br>
+<div class="center"></div>
+<div class="form2">
+    <h2>Find the cost of your next journey now!!</h2>
+    <form action="/searchm" method="POST">
+    
+    <label>From : </label>
+    <input type="text", placeholder="Type your current location" name="src" id="src">
+    <label>To :</label>
+    <input type="text", placeholder="Type your destination" name="dest" id="dest">
+
+    <input type="submit", value="Search">
+    <br>
+    </form>
+    <br>
+    <div>
+      {{ name }}
+    </div>
+</div>
+</div>
+
+   <footer> 
+   
+<div class="menuu">
+ <p>Copyright &copy; 2020 Trotro Live Ltd . <a href="/company">Company Information</a></p>
+ <p2><a href="/privacy">Privacy Terms</a></p2>
+</div>
+</footer>
+</body>
+</html>
