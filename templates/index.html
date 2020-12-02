@@ -92,10 +92,16 @@
     <h2>Find the cost of your next journey now!!</h2>
     <form action="/search" method="POST">
     
-    <label>From : </label>
-    <input type="text", placeholder="Type your current location" name="src" id="src">
-    <label>To :</label>
-    <input type="text", placeholder="Type your destination" name="dest" id="dest">
+    <label for='src'>From : </label>
+    <select name="src" id="src">
+       <option value='Atonsu Agogo'>Atonsu Agogo</option>
+       <option value='Sofoline'>Sofoline</option>
+    </select>
+    <label for='dest'>To :</label>
+    <select name="dest" id="dest">
+      <option value='Atonsu Agogo'>Atonsu Agogo</option>
+      <option value='Sofoline'>Sofoline</option>
+    </select>
 
     <input type="submit", value="Search">
     <br>
