@@ -6,7 +6,7 @@ from flask_login import login_required, logout_user, current_user, login_user
 from flask_login import login_manager
 from functools import wraps
 
-e = ''
+old_email = ''
 
 app = Flask(__name__)
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///trotrousers.db'
@@ -61,6 +61,12 @@ def ensure_logged_in(fn):
             return redirect(url_for('login'))
         return fn(*args, **kwargs)
     return wrapper
+
+@app.before_request
+def before_request():
+    if 'user_id' in session:
+        user = User.query.filter_by(id = session['user_id']).first()
+        g.userfname = user
 
 @app.route('/')
 def home():
@@ -147,7 +153,8 @@ def search():
                                             src=src, 
                                             dest=dest )
         else:
-            return redirect(url_for(home))
+            same = 'Sorry, the fare you are looking for cannot be found'
+            return render_template('index.html', same=same)
 
 @app.route('/searchm' , methods=['POST'])
 @ensure_logged_in
@@ -177,8 +184,8 @@ def searchm():
                                             src=src, 
                                             dest=dest )
         else:
-            return redirect(url_for(member))
-
+            same = 'Sorry, the fare you are looking for cannot be found'
+            return render_template('member.html', same=same)
 
 @app.route('/member')
 @ensure_logged_in
@@ -226,4 +233,4 @@ def logout():
   return redirect(url_for('login'))
 
 if __name__ == "__main__":
-    app.run(debug=False)    
+    app.run(debug=True)    

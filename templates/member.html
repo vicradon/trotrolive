@@ -51,23 +51,26 @@
  
 
       <div class="mainbanner">
-<img src="{{ url_for('static', filename='images/logo.jpg') }}" class="banner">
+         <img src="{{ url_for('static', filename='images/logo.jpg') }}" class="banner">
 
          <br>
          <div>
-            <h3>{{same}}</h3>
-         </div>
-{% with messages = get_flashed_messages() %}
-     {% if messages %}
-        <ul>
-           {% for message in messages %}
-           <li>{{ message }}</li>
-           {% endfor %}
-        </ul>
-     {% endif %}
-{% endwith %}
-
+           <h3>{{ g.userfname.fname }}'s Profile</h3>
+      </div>
+      <br><br><br>
+         {% with messages = get_flashed_messages() %}
+            {% if messages %}
+               <ul>
+                  {% for message in messages %}
+                  <li>{{ message }}</li>
+                  {% endfor %}
+               </ul>
+            {% endif %}
+         {% endwith %}
 <br>
+<div>
+  <h3>{{same}}</h3>
+</div>
 
     <div>  
       {% for singlefar in singlefare %} 
@@ -79,23 +82,434 @@
   </header>
 
 
-<br><br><br><br><br><br><br>
-<br><br>
+<br><br><br><br><br>
 <div class="center"></div>
 <div class="form2">
     <h2>Find the cost of your next journey now!!</h2>
     <form action="/searchm" method="POST">
     
       <label for='src'>From : </label>
-      <select name="src" id="src">
-         <option value='Atonsu Agogo'>Atonsu Agogo</option>
-         <option value='Sofoline'>Sofoline</option>
-      </select>
+      <select id='src' name="src">
+         <option value="+2Pub">+2Pub</option>
+         <option value="A Line">A Line</option>
+         <option value="Aboabo">Aboabo</option>
+         <option value="Aboahu">Aboahu</option>
+         <option value="Abono">Abono</option>
+         <option value="Aboude TUC">Aboude TUC</option>
+         <option value="Abrepo">Abrepo</option>
+         <option value="Abrepo Junction">Abrepo Junction</option>
+         <option value="Abuakwa">Abuakwa</option>
+         <option value="Accra Mall">Accra Mall</option>
+         <option value="Achimota">Achimota</option>
+         <option value="Adjemasu">Adjemasu</option>
+         <option value="Adum">Adum</option>
+         <option value="Adwaase New site">Adwaase New site</option>
+         <option value="Afarawa">Afarawa</option>
+         <option value="Afenya">Afenya</option>
+         <option value="Afenyi">Afenyi</option>
+         <option value="Afful Nkwanta">Afful Nkwanta</option>
+         <option value="Afriwa">Afriwa</option>
+         <option value="Ahenema Kokoben">Ahenema Kokoben</option>
+         <option value="Ahiaw Nkwanta">Ahiaw Nkwanta</option>
+         <option value="Ahinsan">Ahinsan</option>
+         <option value="Ahinsan Market">Ahinsan Market</option>
+         <option value="Ahinsan,Bus Stop">Ahinsan,Bus Stop</option>
+         <option value="Ahodwo">Ahodwo</option>
+         <option value="Ahodwo Melcom">Ahodwo Melcom</option>
+         <option value="Ahodwo Roundabout">Ahodwo Roundabout</option>
+         <option value="Ahodwo Station">Ahodwo Station</option>
+         <option value="Ahwia">Ahwia</option>
+         <option value="Ahwia Nkwanta">Ahwia Nkwanta</option>
+         <option value="Akoko Spears">Akoko Spears</option>
+         <option value="Amakom">Amakom</option>
+         <option value="Amanfrom">Amanfrom</option>
+         <option value="Ampabame">Ampabame</option>
+         <option value="Ampaban">Ampaban</option>
+         <option value="Ampayoo">Ampayoo</option>
+         <option value="Ampeyoo">Ampeyoo</option>
+         <option value="Anlga Junction">Anlga Junction</option>
+         <option value="Anloga Junction">Anloga Junction</option>
+         <option value="Anwia Nkwanta">Anwia Nkwanta</option>
+         <option value="Appiadu">Appiadu</option>
+         <option value="Appiadu Kokoben">Appiadu Kokoben</option>
+         <option value="Aprabo">Aprabo</option>
+         <option value="Aputougya">Aputougya</option>
+         <option value="Aputuogya">Aputuogya</option>
+         <option value="Asafo">Asafo</option>
+         <option value="Asafo, Labour">Asafo, Labour</option>
+         <option value="Asamang">Asamang</option>
+         <option value="Asante Bekwai">Asante Bekwai</option>
+         <option value="Ashiaman">Ashiaman</option>
+         <option value="Ashiaman Main Station">Ashiaman Main Station</option>
+         <option value="Ashiaman Traffic Light">Ashiaman Traffic Light</option>
+         <option value="Asokwa">Asokwa</option>
+         <option value="Asokwa, City Mall">Asokwa, City Mall</option>
+         <option value="Asuofia">Asuofia</option>
+         <option value="Asuofua">Asuofua</option>
+         <option value="Asuoyeboa">Asuoyeboa</option>
+         <option value="Atadaka">Atadaka</option>
+         <option value="Atafoa">Atafoa</option>
+         <option value="Atasomanso">Atasomanso</option>
+         <option value="Atinga Junction">Atinga Junction</option>
+         <option value="Atinka Junction">Atinka Junction</option>
+         <option value="Atonsu">Atonsu</option>
+         <option value="Atonsu Agogo">Atonsu Agogo</option>
+         <option value="Atonsu Bokro Ako Junction">Atonsu Bokro Ako Junction</option>
+         <option value="Atonsu Bokro Last Stop">Atonsu Bokro Last Stop</option>
+         <option value="Atonsu, Agogo">Atonsu, Agogo</option>
+         <option value="Atonsu, Ako Junction">Atonsu, Ako Junction</option>
+         <option value="Atonsu, Bokro Ako Junction">Atonsu, Bokro Ako Junction</option>
+         <option value="Atonsu, Bokro Last Stop">Atonsu, Bokro Last Stop</option>
+         <option value="Atonsu, High School">Atonsu, High School</option>
+         <option value="Atonsu, High School Junction">Atonsu, High School Junction</option>
+         <option value="Atonsu, Monanco">Atonsu, Monanco</option>
+         <option value="Atonsu,Agogo">Atonsu,Agogo</option>
+         <option value="Atonsu,Monanco">Atonsu,Monanco</option>
+         <option value="Ayeduase">Ayeduase</option>
+         <option value="Baba Yara Sports Stadium">Baba Yara Sports Stadium</option>
+         <option value="Bantama">Bantama</option>
+         <option value="BarNas">BarNas</option>
+         <option value="Barrier">Barrier</option>
+         <option value="Bekwai">Bekwai</option>
+         <option value="Bekwai Roundabout">Bekwai Roundabout</option>
+         <option value="Boadi">Boadi</option>
+         <option value="Bofoyedur">Bofoyedur</option>
+         <option value="Bohyen">Bohyen</option>
+         <option value="Bokro">Bokro</option>
+         <option value="Brewery">Brewery</option>
+         <option value="Brofoyedur">Brofoyedur</option>
+         <option value="Buokrom">Buokrom</option>
+         <option value="Circle">Circle</option>
+         <option value="County Hospital">County Hospital</option>
+         <option value="Daban">Daban</option>
+         <option value="Dakwadwom">Dakwadwom</option>
+         <option value="Dankwa First">Dankwa First</option>
+         <option value="Deduako">Deduako</option>
+         <option value="Dichems">Dichems</option>
+         <option value="Dichemso">Dichemso</option>
+         <option value="Dominase">Dominase</option>
+         <option value="Dompoase">Dompoase</option>
+         <option value="Dompoase Aprabo">Dompoase Aprabo</option>
+         <option value="Donyinah">Donyinah</option>
+         <option value="Dowenya">Dowenya</option>
+         <option value="Ejisu">Ejisu</option>
+         <option value="Emina">Emina</option>
+         <option value="Emina Hospital">Emina Hospital</option>
+         <option value="Esreso">Esreso</option>
+         <option value="Estate Junction">Estate Junction</option>
+         <option value="F Line">F Line</option>
+         <option value="Falcon">Falcon</option>
+         <option value="Feyiase Kokoben">Feyiase Kokoben</option>
+         <option value="Foese Kokoben">Foese Kokoben</option>
+         <option value="Freezone">Freezone</option>
+         <option value="Guinness Brewery">Guinness Brewery</option>
+         <option value="Gyinase">Gyinase</option>
+         <option value="IPT">IPT</option>
+         <option value="Jachie">Jachie</option>
+         <option value="Kaase">Kaase</option>
+         <option value="Kahuro">Kahuro</option>
+         <option value="Kejetia">Kejetia</option>
+         <option value="Kejetia, Roman Hill">Kejetia, Roman Hill</option>
+         <option value="Kejetia, Roman Hills">Kejetia, Roman Hills</option>
+         <option value="KFC">KFC</option>
+         <option value="Kokofu">Kokofu</option>
+         <option value="Kosoa">Kosoa</option>
+         <option value="Kotei">Kotei</option>
+         <option value="Kotwi">Kotwi</option>
+         <option value="Kroform">Kroform</option>
+         <option value="Kroform Sokoban">Kroform Sokoban</option>
+         <option value="Krofrom">Krofrom</option>
+         <option value="Krofrom(Sokoban RD)">Krofrom(Sokoban RD)</option>
+         <option value="Kumasi Aiport Roundabout">Kumasi Aiport Roundabout</option>
+         <option value="Kumasi Airport Rounabout">Kumasi Airport Rounabout</option>
+         <option value="Kumasi Airport Roundabout">Kumasi Airport Roundabout</option>
+         <option value="Kumasi Girls School">Kumasi Girls School</option>
+         <option value="Kumasi UEW">Kumasi UEW</option>
+         <option value="Kutanase">Kutanase</option>
+         <option value="Kutenase">Kutenase</option>
+         <option value="Kuwa">Kuwa</option>
+         <option value="Kuwait">Kuwait</option>
+         <option value="Kwadaso">Kwadaso</option>
+         <option value="Kwadwo">Kwadwo</option>
+         <option value="Labadi">Labadi</option>
+         <option value="Lapaz">Lapaz</option>
+         <option value="Lashibi">Lashibi</option>
+         <option value="Lashibi Tx">Lashibi Tx</option>
+         <option value="Lebanon">Lebanon</option>
+         <option value="Maakro">Maakro</option>
+         <option value="Mamponteng">Mamponteng</option>
+         <option value="Manso">Manso</option>
+         <option value="Mateheko">Mateheko</option>
+         <option value="Mayanka">Mayanka</option>
+         <option value="Medoma">Medoma</option>
+         <option value="Methodist">Methodist</option>
+         <option value="Michel Camp">Michel Camp</option>
+         <option value="Nahinso">Nahinso</option>
+         <option value="Nana Appiah">Nana Appiah</option>
+         <option value="New Junction">New Junction</option>
+         <option value="Newton junction">Newton junction</option>
+         <option value="Nima">Nima</option>
+         <option value="Nkronsa">Nkronsa</option>
+         <option value="Nkronsah">Nkronsah</option>
+         <option value="Nunga">Nunga</option>
+         <option value="Oforikrom">Oforikrom</option>
+         <option value="Ohwim">Ohwim</option>
+         <option value="Opoku Ware School">Opoku Ware School</option>
+         <option value="Ownen">Ownen</option>
+         <option value="Ownien">Ownien</option>
+         <option value="Patasi">Patasi</option>
+         <option value="Pekyi 1">Pekyi 1</option>
+         <option value="Pekyi 2">Pekyi 2</option>
+         <option value="Pekyi N01">Pekyi N01</option>
+         <option value="Pekyi N02">Pekyi N02</option>
+         <option value="Police Station">Police Station</option>
+         <option value="Prampram">Prampram</option>
+         <option value="Ramseyer">Ramseyer</option>
+         <option value="Santasi">Santasi</option>
+         <option value="Santasi Roundabout">Santasi Roundabout</option>
+         <option value="Santasi, Owass">Santasi, Owass</option>
+         <option value="Santasi, Star Junction">Santasi, Star Junction</option>
+         <option value="Savanna">Savanna</option>
+         <option value="School Junction">School Junction</option>
+         <option value="Second Step">Second Step</option>
+         <option value="Shangrila">Shangrila</option>
+         <option value="Sofoline">Sofoline</option>
+         <option value="Sokoban">Sokoban</option>
+         <option value="Spintex">Spintex</option>
+         <option value="St Abed">St Abed</option>
+         <option value="Star Junction">Star Junction</option>
+         <option value="Suame Rounabout">Suame Rounabout</option>
+         <option value="Suame Roundabout">Suame Roundabout</option>
+         <option value="Suame, Magazine">Suame, Magazine</option>
+         <option value="Susuanso">Susuanso</option>
+         <option value="Susuaso">Susuaso</option>
+         <option value="Tafo">Tafo</option>
+         <option value="Tanoso">Tanoso</option>
+         <option value="Tanoso, IPT">Tanoso, IPT</option>
+         <option value="Tech">Tech</option>
+         <option value="Tech Junction">Tech Junction</option>
+         <option value="Tema">Tema</option>
+         <option value="Tema Comm 9 to 1">Tema Comm 9 to 1</option>
+         <option value="Tema Motorway, Rabout">Tema Motorway, Rabout</option>
+         <option value="Tema, Comm18">Tema, Comm18</option>
+         <option value="Tema, Comm.25">Tema, Comm.25</option>
+         <option value="Teshie">Teshie</option>
+         <option value="Trede">Trede</option>
+         <option value="Tsuibleblo">Tsuibleblo</option>
+         <option value="TUC">TUC</option>
+         <option value="Zeenu">Zeenu</option>
+       </select>
       <label for='dest'>To :</label>
-      <select name="dest" id="dest">
-        <option value='Atonsu Agogo'>Atonsu Agogo</option>
-        <option value='Sofoline'>Sofoline</option>
-      </select>
+      <select id='dest' name="dest">
+         <option value="+2Pub">+2Pub</option>
+         <option value="A Line">A Line</option>
+         <option value="Aboabo">Aboabo</option>
+         <option value="Aboahu">Aboahu</option>
+         <option value="Abono">Abono</option>
+         <option value="Aboude TUC">Aboude TUC</option>
+         <option value="Abrepo">Abrepo</option>
+         <option value="Abrepo Junction">Abrepo Junction</option>
+         <option value="Abuakwa">Abuakwa</option>
+         <option value="Accra Mall">Accra Mall</option>
+         <option value="Achimota">Achimota</option>
+         <option value="Adjemasu">Adjemasu</option>
+         <option value="Adum">Adum</option>
+         <option value="Adwaase New site">Adwaase New site</option>
+         <option value="Afarawa">Afarawa</option>
+         <option value="Afenya">Afenya</option>
+         <option value="Afenyi">Afenyi</option>
+         <option value="Afful Nkwanta">Afful Nkwanta</option>
+         <option value="Afriwa">Afriwa</option>
+         <option value="Ahenema Kokoben">Ahenema Kokoben</option>
+         <option value="Ahiaw Nkwanta">Ahiaw Nkwanta</option>
+         <option value="Ahinsan">Ahinsan</option>
+         <option value="Ahinsan Market">Ahinsan Market</option>
+         <option value="Ahinsan,Bus Stop">Ahinsan,Bus Stop</option>
+         <option value="Ahodwo">Ahodwo</option>
+         <option value="Ahodwo Melcom">Ahodwo Melcom</option>
+         <option value="Ahodwo Roundabout">Ahodwo Roundabout</option>
+         <option value="Ahodwo Station">Ahodwo Station</option>
+         <option value="Ahwia">Ahwia</option>
+         <option value="Ahwia Nkwanta">Ahwia Nkwanta</option>
+         <option value="Akoko Spears">Akoko Spears</option>
+         <option value="Amakom">Amakom</option>
+         <option value="Amanfrom">Amanfrom</option>
+         <option value="Ampabame">Ampabame</option>
+         <option value="Ampaban">Ampaban</option>
+         <option value="Ampayoo">Ampayoo</option>
+         <option value="Ampeyoo">Ampeyoo</option>
+         <option value="Anlga Junction">Anlga Junction</option>
+         <option value="Anloga Junction">Anloga Junction</option>
+         <option value="Anwia Nkwanta">Anwia Nkwanta</option>
+         <option value="Appiadu">Appiadu</option>
+         <option value="Appiadu Kokoben">Appiadu Kokoben</option>
+         <option value="Aprabo">Aprabo</option>
+         <option value="Aputougya">Aputougya</option>
+         <option value="Aputuogya">Aputuogya</option>
+         <option value="Asafo">Asafo</option>
+         <option value="Asafo, Labour">Asafo, Labour</option>
+         <option value="Asamang">Asamang</option>
+         <option value="Asante Bekwai">Asante Bekwai</option>
+         <option value="Ashiaman">Ashiaman</option>
+         <option value="Ashiaman Main Station">Ashiaman Main Station</option>
+         <option value="Ashiaman Traffic Light">Ashiaman Traffic Light</option>
+         <option value="Asokwa">Asokwa</option>
+         <option value="Asokwa, City Mall">Asokwa, City Mall</option>
+         <option value="Asuofia">Asuofia</option>
+         <option value="Asuofua">Asuofua</option>
+         <option value="Asuoyeboa">Asuoyeboa</option>
+         <option value="Atadaka">Atadaka</option>
+         <option value="Atafoa">Atafoa</option>
+         <option value="Atasomanso">Atasomanso</option>
+         <option value="Atinga Junction">Atinga Junction</option>
+         <option value="Atinka Junction">Atinka Junction</option>
+         <option value="Atonsu">Atonsu</option>
+         <option value="Atonsu Agogo">Atonsu Agogo</option>
+         <option value="Atonsu Bokro Ako Junction">Atonsu Bokro Ako Junction</option>
+         <option value="Atonsu Bokro Last Stop">Atonsu Bokro Last Stop</option>
+         <option value="Atonsu, Agogo">Atonsu, Agogo</option>
+         <option value="Atonsu, Ako Junction">Atonsu, Ako Junction</option>
+         <option value="Atonsu, Bokro Ako Junction">Atonsu, Bokro Ako Junction</option>
+         <option value="Atonsu, Bokro Last Stop">Atonsu, Bokro Last Stop</option>
+         <option value="Atonsu, High School">Atonsu, High School</option>
+         <option value="Atonsu, High School Junction">Atonsu, High School Junction</option>
+         <option value="Atonsu, Monanco">Atonsu, Monanco</option>
+         <option value="Atonsu,Agogo">Atonsu,Agogo</option>
+         <option value="Atonsu,Monanco">Atonsu,Monanco</option>
+         <option value="Ayeduase">Ayeduase</option>
+         <option value="Baba Yara Sports Stadium">Baba Yara Sports Stadium</option>
+         <option value="Bantama">Bantama</option>
+         <option value="BarNas">BarNas</option>
+         <option value="Barrier">Barrier</option>
+         <option value="Bekwai">Bekwai</option>
+         <option value="Bekwai Roundabout">Bekwai Roundabout</option>
+         <option value="Boadi">Boadi</option>
+         <option value="Bofoyedur">Bofoyedur</option>
+         <option value="Bohyen">Bohyen</option>
+         <option value="Bokro">Bokro</option>
+         <option value="Brewery">Brewery</option>
+         <option value="Brofoyedur">Brofoyedur</option>
+         <option value="Buokrom">Buokrom</option>
+         <option value="Circle">Circle</option>
+         <option value="County Hospital">County Hospital</option>
+         <option value="Daban">Daban</option>
+         <option value="Dakwadwom">Dakwadwom</option>
+         <option value="Dankwa First">Dankwa First</option>
+         <option value="Deduako">Deduako</option>
+         <option value="Dichems">Dichems</option>
+         <option value="Dichemso">Dichemso</option>
+         <option value="Dominase">Dominase</option>
+         <option value="Dompoase">Dompoase</option>
+         <option value="Dompoase Aprabo">Dompoase Aprabo</option>
+         <option value="Donyinah">Donyinah</option>
+         <option value="Dowenya">Dowenya</option>
+         <option value="Ejisu">Ejisu</option>
+         <option value="Emina">Emina</option>
+         <option value="Emina Hospital">Emina Hospital</option>
+         <option value="Esreso">Esreso</option>
+         <option value="Estate Junction">Estate Junction</option>
+         <option value="F Line">F Line</option>
+         <option value="Falcon">Falcon</option>
+         <option value="Feyiase Kokoben">Feyiase Kokoben</option>
+         <option value="Foese Kokoben">Foese Kokoben</option>
+         <option value="Freezone">Freezone</option>
+         <option value="Guinness Brewery">Guinness Brewery</option>
+         <option value="Gyinase">Gyinase</option>
+         <option value="IPT">IPT</option>
+         <option value="Jachie">Jachie</option>
+         <option value="Kaase">Kaase</option>
+         <option value="Kahuro">Kahuro</option>
+         <option value="Kejetia">Kejetia</option>
+         <option value="Kejetia, Roman Hill">Kejetia, Roman Hill</option>
+         <option value="Kejetia, Roman Hills">Kejetia, Roman Hills</option>
+         <option value="KFC">KFC</option>
+         <option value="Kokofu">Kokofu</option>
+         <option value="Kosoa">Kosoa</option>
+         <option value="Kotei">Kotei</option>
+         <option value="Kotwi">Kotwi</option>
+         <option value="Kroform">Kroform</option>
+         <option value="Kroform Sokoban">Kroform Sokoban</option>
+         <option value="Krofrom">Krofrom</option>
+         <option value="Krofrom(Sokoban RD)">Krofrom(Sokoban RD)</option>
+         <option value="Kumasi Aiport Roundabout">Kumasi Aiport Roundabout</option>
+         <option value="Kumasi Airport Rounabout">Kumasi Airport Rounabout</option>
+         <option value="Kumasi Airport Roundabout">Kumasi Airport Roundabout</option>
+         <option value="Kumasi Girls School">Kumasi Girls School</option>
+         <option value="Kumasi UEW">Kumasi UEW</option>
+         <option value="Kutanase">Kutanase</option>
+         <option value="Kutenase">Kutenase</option>
+         <option value="Kuwa">Kuwa</option>
+         <option value="Kuwait">Kuwait</option>
+         <option value="Kwadaso">Kwadaso</option>
+         <option value="Kwadwo">Kwadwo</option>
+         <option value="Labadi">Labadi</option>
+         <option value="Lapaz">Lapaz</option>
+         <option value="Lashibi">Lashibi</option>
+         <option value="Lashibi Tx">Lashibi Tx</option>
+         <option value="Lebanon">Lebanon</option>
+         <option value="Maakro">Maakro</option>
+         <option value="Mamponteng">Mamponteng</option>
+         <option value="Manso">Manso</option>
+         <option value="Mateheko">Mateheko</option>
+         <option value="Mayanka">Mayanka</option>
+         <option value="Medoma">Medoma</option>
+         <option value="Methodist">Methodist</option>
+         <option value="Michel Camp">Michel Camp</option>
+         <option value="Nahinso">Nahinso</option>
+         <option value="Nana Appiah">Nana Appiah</option>
+         <option value="New Junction">New Junction</option>
+         <option value="Newton junction">Newton junction</option>
+         <option value="Nima">Nima</option>
+         <option value="Nkronsa">Nkronsa</option>
+         <option value="Nkronsah">Nkronsah</option>
+         <option value="Nunga">Nunga</option>
+         <option value="Oforikrom">Oforikrom</option>
+         <option value="Ohwim">Ohwim</option>
+         <option value="Opoku Ware School">Opoku Ware School</option>
+         <option value="Ownen">Ownen</option>
+         <option value="Ownien">Ownien</option>
+         <option value="Patasi">Patasi</option>
+         <option value="Pekyi 1">Pekyi 1</option>
+         <option value="Pekyi 2">Pekyi 2</option>
+         <option value="Pekyi N01">Pekyi N01</option>
+         <option value="Pekyi N02">Pekyi N02</option>
+         <option value="Police Station">Police Station</option>
+         <option value="Prampram">Prampram</option>
+         <option value="Ramseyer">Ramseyer</option>
+         <option value="Santasi">Santasi</option>
+         <option value="Santasi Roundabout">Santasi Roundabout</option>
+         <option value="Santasi, Owass">Santasi, Owass</option>
+         <option value="Santasi, Star Junction">Santasi, Star Junction</option>
+         <option value="Savanna">Savanna</option>
+         <option value="School Junction">School Junction</option>
+         <option value="Second Step">Second Step</option>
+         <option value="Shangrila">Shangrila</option>
+         <option value="Sofoline">Sofoline</option>
+         <option value="Sokoban">Sokoban</option>
+         <option value="Spintex">Spintex</option>
+         <option value="St Abed">St Abed</option>
+         <option value="Star Junction">Star Junction</option>
+         <option value="Suame Rounabout">Suame Rounabout</option>
+         <option value="Suame Roundabout">Suame Roundabout</option>
+         <option value="Suame, Magazine">Suame, Magazine</option>
+         <option value="Susuanso">Susuanso</option>
+         <option value="Susuaso">Susuaso</option>
+         <option value="Tafo">Tafo</option>
+         <option value="Tanoso">Tanoso</option>
+         <option value="Tanoso, IPT">Tanoso, IPT</option>
+         <option value="Tech">Tech</option>
+         <option value="Tech Junction">Tech Junction</option>
+         <option value="Tema">Tema</option>
+         <option value="Tema Comm 9 to 1">Tema Comm 9 to 1</option>
+         <option value="Tema Motorway, Rabout">Tema Motorway, Rabout</option>
+         <option value="Tema, Comm18">Tema, Comm18</option>
+         <option value="Tema, Comm.25">Tema, Comm.25</option>
+         <option value="Teshie">Teshie</option>
+         <option value="Trede">Trede</option>
+         <option value="Tsuibleblo">Tsuibleblo</option>
+         <option value="TUC">TUC</option>
+         <option value="Zeenu">Zeenu</option>
+       </select>
     <input type="submit", value="Search">
     <br>
     </form>
