@@ -253,6 +253,7 @@ def suggest():
 @ensure_logged_in
 def logout():
   session.pop('user_id', None)
+  session.pop('profile', None)
   flash('You have been signed out.')
   return redirect(url_for('login'))
 
@@ -275,13 +276,6 @@ def authorize():
         'name': userinfo['name'],
         'picture': userinfo['picture']
     }
-    print('here')
-    print('here')
-    print('here')
-    print('here')
-    print('here')
-    print('here')
-    print(session)
     return redirect('/member')
 
 
