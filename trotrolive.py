@@ -261,7 +261,7 @@ def logout():
 def loginG():
     session.pop('user_id', None)
     session.pop('profile', None)
-    return auth0.authorize_redirect(redirect_uri='http://127.0.0.1:5000/authorize')
+    return auth0.authorize_redirect(redirect_uri='https://trotrolive.herokuapp.com/authorize')
 
 @app.route('/authorize')
 def authorize():
@@ -281,4 +281,4 @@ def authorize():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)    
+    app.run(debug=False)    
