@@ -55,7 +55,12 @@
 
          <br>
          <div>
-           <h3>{{ g.userfname.fname }}'s Profile</h3>
+            {% if g.userfname %}
+               <h3>{{ g.userfname.fname }}'s Profile</h3>
+            {% endif %}
+            {% if g.username %}
+               <h3>{{ g.username.name }}'s Profile</h3>
+            {% endif %}
       </div>
       <br><br><br>
          {% with messages = get_flashed_messages() %}

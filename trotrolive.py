@@ -1,14 +1,20 @@
-from flask import Flask, render_template, flash, request, url_for, redirect, session, g
+from flask import Flask, render_template, flash, request, url_for, redirect, session, g, jsonify
 from flask_sqlalchemy import SQLAlchemy 
 from wtforms import Form, BooleanField, StringField, PasswordField, validators
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_required, logout_user, current_user, login_user
 from flask_login import login_manager
 from functools import wraps
+import json
+from authlib.integrations.flask_client import OAuth
+
 
 old_email = ''
 
 app = Flask(__name__)
+
+
+
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///trotrousers.db'
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///fares.db'
 app.config['SQLALCHEMY_BINDS'] = {
@@ -18,6 +24,19 @@ app.config['SQLALCHEMY_BINDS'] = {
 }
 db = SQLAlchemy(app)
 app.secret_key = 'secretkey'
+oauth = OAuth(app)
+
+auth0 = oauth.register(
+    'auth0',
+    client_id='0HQbdZewdUuIHCBfLqPxtHnk5JxVXmbl',
+    client_secret='pKLSq8968hvDSgZN0MM_mZ-5PmjzEsdwzmnUpM4drLzbfz7DlmbCpLvLawQ-dw55',
+    api_base_url='https://111uuuccciii.us.auth0.com',
+    access_token_url='https://111uuuccciii.us.auth0.com/oauth/token',
+    authorize_url='https://111uuuccciii.us.auth0.com/authorize',
+    client_kwargs={
+        'scope': 'openid profile email',
+    },
+)
 
 
 class User(db.Model):
@@ -56,7 +75,7 @@ def __init__(fares, srcdest, fare):
 def ensure_logged_in(fn):
     @wraps(fn)
     def wrapper(*args, **kwargs):
-        if not session.get('user_id'):
+        if not (session.get('user_id') or session.get('profile')):
             flash("Please log in first")
             return redirect(url_for('login'))
         return fn(*args, **kwargs)
@@ -67,6 +86,9 @@ def before_request():
     if 'user_id' in session:
         user = User.query.filter_by(id = session['user_id']).first()
         g.userfname = user
+    elif 'profile' in session:
+        user = session['profile']
+        g.username = user
 
 @app.route('/')
 def home():
@@ -113,6 +135,7 @@ def signup():
 def login():
     if request.method == 'POST':
         session.pop('user_id', None)
+        session.pop('profile', None)
         old_email = request.form['email']
         passcheck = request.form['password']
         email = User.query.filter_by(email = old_email).first()
@@ -190,7 +213,8 @@ def searchm():
 @app.route('/member')
 @ensure_logged_in
 def member():
-    return render_template('member.html')
+    email = dict(session).get('email', None)
+    return render_template('member.html', email=email)
 
 @app.route('/company')
 def company():
@@ -231,6 +255,36 @@ def logout():
   session.pop('user_id', None)
   flash('You have been signed out.')
   return redirect(url_for('login'))
+
+@app.route('/loginG')
+def loginG():
+    session.pop('user_id', None)
+    session.pop('profile', None)
+    return auth0.authorize_redirect(redirect_uri='http://127.0.0.1:5000/authorize')
+
+@app.route('/authorize')
+def authorize():
+    auth0.authorize_access_token()
+    resp = auth0.get('userinfo')
+    userinfo = resp.json()
+
+    # Store the user information in flask session.
+    session['jwt_payload'] = userinfo
+    session['profile'] = {
+        'user_id': userinfo['sub'],
+        'name': userinfo['name'],
+        'picture': userinfo['picture']
+    }
+    print('here')
+    print('here')
+    print('here')
+    print('here')
+    print('here')
+    print('here')
+    print(session)
+    return redirect('/member')
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)    
