@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trotro Live</title>
+</head>
+<body>
+   <header>
+     <div class="toptitle">
+        <ul>
+      <li>  <img class="banner2" src="{{ url_for('static', filename='images/logomod.png') }}"></li>
+   
+      <li><h2 class ="maintext" >Trotro Live</h2></li>
+   
+</ul>
+</div>
+<h3 class="maintext"><marquee behavior="alternate" scrollamount="15">The future is great with science and data </marquee></h3>
+      
+      
+   <div class="menubar">
+      <ul>
+         <li><a href="/">Home</a></li>
+         <li><a href="#">About Us</a>
+            
+         <div class="submenu">
+            <ul>
+               <li><a href="/company">Company Info</a></li>
+               <li><a href="/team">Meet The Team</a></li>
+               <li><a href="/policies">Policies</a></li>
+            </ul>
+         </div>
+      </li>
+         <li><a href="/member">My Page</a></li>
+         <li><a href="#">Travel Tips</a>
+         <div class="submenu">
+            <ul>
+               <li><a href="/travel">General Travel</a></li>
+               <li><a href="/health">Health Concerns</a></li>
+               <li><a href="/safety">Safety Measures</a></li>
+               <li><a href="/faqs">FAQs</a></li>
+            </ul>
+         </div>
+      </li>
+         <li><a href="#">Customer Service</a>
+         <div class="submenu">
+            <ul>
+               <li><a href="/team">Chat Us</a></li>
+               <li><a href="/report">Report Missing Items</a></li>
+            </ul>
+         </div>
+      </li>
+      </ul>
+   </div>
+</header>
+   <div class="showcase">
+   <section>
+      <h1>Wondering the cost of transport from anywhere in the country?</h1>
+      <br>
+      <br> <br>
+      <h2> Join the most precise and updated fares network now!!!</h2>
+  </section>
+</div>
+
+<br><br><br>
+
+   
+<div class="join">
+    Join Us today!!
+    <button> <a href="signup" class="signup-btn"><span>Sign Up</span></a></button>
+
+<br>
+
+    Already a member?
+<button><a href="login" class="login-btn"><span>Log In</span></a> </button>
+<br>
+</div>
+
+<div class="mainbanner"> 
+    <img src="{{ url_for('static', filename='images/logo.jpg') }}" class="banner">
+    <br>
+    <div>
+      <h3>{{same}}</h3>
+    </div>
+    <br>
+    <div>  
+      {% for singlefar in singlefare %} 
+      <h3>Fare from {{ src }} to {{ dest }} is: </h3>         
+      <h2>GH₵ {{ singlefar.fare }}0 p {{ singlefar.transit }}</h2>
+      {% endfor %}
+    </div>
+    <br>
+</div>
+
+<div class="center"></div>
+<div class="form2">
+    <h2>Find the cost of your next journey now!!</h2>
+    <form action="/searchaccra" method="POST">
+    
+    <label for='src'>From : </label>
+    <select id='src' name="src">
+      <option value="Accra Mall">Accra Mall</option>
+      <option value="Achimota">Achimota</option>
+      <option value="Afarawa">Afarawa</option>
+      <option value="Afenya">Afenya</option>
+      <option value="Afenyi">Afenyi</option>
+      <option value="Afriwa">Afriwa</option>
+      <option value="Ashiaman">Ashiaman</option>
+      <option value="Ashiaman Main Station">Ashiaman Main Station</option>
+      <option value="Ashiaman Traffic Light">Ashiaman Traffic Light</option>
+      <option value="Atadaka">Atadaka</option>
+      <option value="Barrier">Barrier</option>
+      <option value="Circle">Circle</option>
+      <option value="Dankwa First">Dankwa First</option>
+      <option value="Dowenya">Dowenya</option>
+      <option value="Estate Junction">Estate Junction</option>
+      <option value="Falcon">Falcon</option>
+      <option value="Freezone">Freezone</option>
+      <option value="KFC">KFC</option>
+      <option value="Kosoa">Kosoa</option>
+      <option value="Labadi">Labadi</option>
+      <option value="Lapaz">Lapaz</option>
+      <option value="Lashibi">Lashibi</option>
+      <option value="Lashibi Tx">Lashibi Tx</option>
+      <option value="Lebanon">Lebanon</option>
+      <option value="Manso">Manso</option>
+      <option value="Mateheko">Mateheko</option>
+      <option value="Methodist">Methodist</option>
+      <option value="Michel Camp">Michel Camp</option>
+      <option value="New Junction">New Junction</option>
+      <option value="Newton junction">Newton junction</option>
+      <option value="Nima">Nima</option>
+      <option value="Nunga">Nunga</option>
+      <option value="Police Station">Police Station</option>
+      <option value="Prampram">Prampram</option>
+      <option value="Savanna">Savanna</option>
+      <option value="School Junction">School Junction</option>
+      <option value="Second Step">Second Step</option>
+      <option value="Shangrila">Shangrila</option>
+      <option value="Spintex">Spintex</option>
+      <option value="Tema">Tema</option>
+      <option value="Tema Comm 9 to 1">Tema Comm 9 to 1</option>
+      <option value="Tema Motorway, Rabout">Tema Motorway, Rabout</option>
+      <option value="Tema, Comm18">Tema, Comm18</option>
+      <option value="Tema, Comm.25">Tema, Comm.25</option>
+      <option value="Teshie">Teshie</option>
+      <option value="Tsuibleblo">Tsuibleblo</option>
+      <option value="Zeenu">Zeenu</option>
+      </select>
+    <label for='dest'>To :</label>
+    <select id='dest' name="dest">
+      <option value="Accra Mall">Accra Mall</option>
+      <option value="Achimota">Achimota</option>
+      <option value="Afarawa">Afarawa</option>
+      <option value="Afenya">Afenya</option>
+      <option value="Afenyi">Afenyi</option>
+      <option value="Afriwa">Afriwa</option>
+      <option value="Ashiaman">Ashiaman</option>
+      <option value="Ashiaman Main Station">Ashiaman Main Station</option>
+      <option value="Ashiaman Traffic Light">Ashiaman Traffic Light</option>
+      <option value="Atadaka">Atadaka</option>
+      <option value="Barrier">Barrier</option>
+      <option value="Circle">Circle</option>
+      <option value="Dankwa First">Dankwa First</option>
+      <option value="Dowenya">Dowenya</option>
+      <option value="Estate Junction">Estate Junction</option>
+      <option value="Falcon">Falcon</option>
+      <option value="Freezone">Freezone</option>
+      <option value="KFC">KFC</option>
+      <option value="Kosoa">Kosoa</option>
+      <option value="Labadi">Labadi</option>
+      <option value="Lapaz">Lapaz</option>
+      <option value="Lashibi">Lashibi</option>
+      <option value="Lashibi Tx">Lashibi Tx</option>
+      <option value="Lebanon">Lebanon</option>
+      <option value="Manso">Manso</option>
+      <option value="Mateheko">Mateheko</option>
+      <option value="Methodist">Methodist</option>
+      <option value="Michel Camp">Michel Camp</option>
+      <option value="New Junction">New Junction</option>
+      <option value="Newton junction">Newton junction</option>
+      <option value="Nima">Nima</option>
+      <option value="Nunga">Nunga</option>
+      <option value="Police Station">Police Station</option>
+      <option value="Prampram">Prampram</option>
+      <option value="Savanna">Savanna</option>
+      <option value="School Junction">School Junction</option>
+      <option value="Second Step">Second Step</option>
+      <option value="Shangrila">Shangrila</option>
+      <option value="Spintex">Spintex</option>
+      <option value="Tema">Tema</option>
+      <option value="Tema Comm 9 to 1">Tema Comm 9 to 1</option>
+      <option value="Tema Motorway, Rabout">Tema Motorway, Rabout</option>
+      <option value="Tema, Comm18">Tema, Comm18</option>
+      <option value="Tema, Comm.25">Tema, Comm.25</option>
+      <option value="Teshie">Teshie</option>
+      <option value="Tsuibleblo">Tsuibleblo</option>
+      <option value="Zeenu">Zeenu</option>
+      </select>
+    <input type="submit", value="Search">
+    <br>
+    </form>
+    <br>
+
+    <a href="/suggest">Fare not included? Suggest A fare now</a>
+    
+    <br>
+</div>
+</div>
+
+<footer> 
+ <br>
+ <p>Copyright &copy; 2020 Trotro Live Ltd . <a href="company.html">Company Information</a></p>
+ <p2><a href="privacy.html">Privacy Terms</a></p2>
+<br>
+</footer>
+
+
+</body>
+</html>

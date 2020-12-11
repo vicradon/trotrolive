@@ -22,6 +22,8 @@ app.config['SQLALCHEMY_BINDS'] = {
     'fares':      'sqlite:///fares.db',
     'userfares':  'sqlite:///userfares.db',
     'kumasifares':  'sqlite:///KumasiFaresdb.db',
+    'obuasifares':  'sqlite:///ObuasiFaresdb.db',
+    'accrafares':  'sqlite:///AccraFaresdb.db',
     'sefwifares':  'sqlite:///SefwiFaresdb.db'
 }
 db = SQLAlchemy(app)
@@ -83,6 +85,20 @@ class sefwifares(db.Model):
     fare = db.Column(db.String(15), unique=False, nullable=False)
     transit = db.Column(db.String(15), unique=False, nullable=False)
 
+class obuasifares(db.Model):
+    __bind_key__ = 'obuasifares'
+    id = db.Column(db.Integer, unique=True, primary_key=True)
+    srcdest = db.Column(db.String(50), unique=False, nullable=False)
+    fare = db.Column(db.String(15), unique=False, nullable=False)
+    transit = db.Column(db.String(15), unique=False, nullable=False)
+
+class accrafares(db.Model):
+    __bind_key__ = 'accrafares'
+    id = db.Column(db.Integer, unique=True, primary_key=True)
+    srcdest = db.Column(db.String(50), unique=False, nullable=False)
+    fare = db.Column(db.String(15), unique=False, nullable=False)
+    transit = db.Column(db.String(15), unique=False, nullable=False)
+
 
 def __init__(fares, srcdest, fare):
     fares.srcdest = srcdest
@@ -119,6 +135,14 @@ def kumasi():
 def sefwi():
     return render_template('sefwi.html')
 
+@app.route('/obuasi')
+def obuasi():
+    return render_template('obuasi.html')
+
+@app.route('/accra')
+def accra():
+    return render_template('accra.html')
+
 
 @app.route('/selectcity' , methods=['POST'])
 def selectcity():
@@ -128,6 +152,10 @@ def selectcity():
         return redirect(url_for('kumasi'))
     elif city == 'sefwi':
         return redirect(url_for('sefwi'))
+    elif city == 'obuasi':
+        return redirect(url_for('obuasi'))
+    elif city == 'accra':
+        return redirect(url_for('accra'))
         
 
 
@@ -206,7 +234,7 @@ def search():
 
     else:
         srcdest = str(dest)+str(un)+str(src)
-        check = fares.query.filter_by(srcdest = srcdest).all()
+        check = kumasifares.query.filter_by(srcdest = srcdest).all()
         if check != []:
             return render_template('kumasi.html', 
                                             singlefare = check , 
@@ -237,7 +265,7 @@ def searchsefwi():
 
     else:
         srcdest = str(dest)+str(un)+str(src)
-        check = fares.query.filter_by(srcdest = srcdest).all()
+        check = sefwifares.query.filter_by(srcdest = srcdest).all()
         if check != []:
             return render_template('sefwi.html', 
                                             singlefare = check , 
@@ -246,6 +274,68 @@ def searchsefwi():
         else:
             same = 'Sorry, the fare you are looking for cannot be found'
             return render_template('sefwi.html', same=same)
+
+
+@app.route('/searchobuasi' , methods=['POST'])
+def searchobuasi():
+    src = request.form['src']
+    dest = request.form['dest']
+    if src == dest:
+        same = 'You chose the same location twice!'
+        return render_template('obuasi.html', same=same)
+    else:
+        un = str('_')
+        srcdest = str(src)+str(un)+str(dest)
+        check = obuasifares.query.filter_by(srcdest = srcdest).all()
+
+    if check != []:
+        return render_template('obuasi.html', 
+                                            singlefare = check , 
+                                            src=src, 
+                                            dest=dest )
+
+    else:
+        srcdest = str(dest)+str(un)+str(src)
+        check = obuasifares.query.filter_by(srcdest = srcdest).all()
+        if check != []:
+            return render_template('obuasi.html', 
+                                            singlefare = check , 
+                                            src=src, 
+                                            dest=dest )
+        else:
+            same = 'Sorry, the fare you are looking for cannot be found'
+            return render_template('obuasi.html', same=same)
+
+
+@app.route('/searchaccra' , methods=['POST'])
+def searchaccra():
+    src = request.form['src']
+    dest = request.form['dest']
+    if src == dest:
+        same = 'You chose the same location twice!'
+        return render_template('accra.html', same=same)
+    else:
+        un = str('_')
+        srcdest = str(src)+str(un)+str(dest)
+        check = accrafares.query.filter_by(srcdest = srcdest).all()
+
+    if check != []:
+        return render_template('accra.html', 
+                                            singlefare = check , 
+                                            src=src, 
+                                            dest=dest )
+
+    else:
+        srcdest = str(dest)+str(un)+str(src)
+        check = accrafares.query.filter_by(srcdest = srcdest).all()
+        if check != []:
+            return render_template('accra.html', 
+                                            singlefare = check , 
+                                            src=src, 
+                                            dest=dest )
+        else:
+            same = 'Sorry, the fare you are looking for cannot be found'
+            return render_template('accra.html', same=same)
         
 
 @app.route('/searchm' , methods=['POST'])
