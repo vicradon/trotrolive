@@ -20,7 +20,9 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_BINDS'] = {
     'User':      'sqlite:///trotrousers.db',
     'fares':      'sqlite:///fares.db',
-    'userfares':  'sqlite:///userfares.db'
+    'userfares':  'sqlite:///userfares.db',
+    'kumasifares':  'sqlite:///KumasiFaresdb.db',
+    'sefwifares':  'sqlite:///SefwiFaresdb.db'
 }
 db = SQLAlchemy(app)
 app.secret_key = 'secretkey'
@@ -67,6 +69,21 @@ class userfares(db.Model):
     fare = db.Column(db.String(15), unique=False, nullable=False)
     transit = db.Column(db.String(15), unique=False, nullable=False)
 
+class kumasifares(db.Model):
+    __bind_key__ = 'kumasifares'
+    id = db.Column(db.Integer, unique=True, primary_key=True)
+    srcdest = db.Column(db.String(50), unique=False, nullable=False)
+    fare = db.Column(db.String(15), unique=False, nullable=False)
+    transit = db.Column(db.String(15), unique=False, nullable=False)
+
+class sefwifares(db.Model):
+    __bind_key__ = 'sefwifares'
+    id = db.Column(db.Integer, unique=True, primary_key=True)
+    srcdest = db.Column(db.String(50), unique=False, nullable=False)
+    fare = db.Column(db.String(15), unique=False, nullable=False)
+    transit = db.Column(db.String(15), unique=False, nullable=False)
+
+
 def __init__(fares, srcdest, fare):
     fares.srcdest = srcdest
     fares.fare = fare
@@ -93,6 +110,26 @@ def before_request():
 @app.route('/')
 def home():
     return render_template('index.html')
+
+@app.route('/kumasi')
+def kumasi():
+    return render_template('kumasi.html')
+
+@app.route('/sefwi')
+def sefwi():
+    return render_template('sefwi.html')
+
+
+@app.route('/selectcity' , methods=['POST'])
+def selectcity():
+    city = request.form['city']
+    city = str(city)
+    if city == 'kumasi':
+        return redirect(url_for('kumasi'))
+    elif city == 'sefwi':
+        return redirect(url_for('sefwi'))
+        
+
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -155,14 +192,14 @@ def search():
     dest = request.form['dest']
     if src == dest:
         same = 'You chose the same location twice!'
-        return render_template('index.html', same=same)
+        return render_template('kumasi.html', same=same)
     else:
         un = str('_')
         srcdest = str(src)+str(un)+str(dest)
-        check = fares.query.filter_by(srcdest = srcdest).all()
+        check = kumasifares.query.filter_by(srcdest = srcdest).all()
 
     if check != []:
-        return render_template('index.html', 
+        return render_template('kumasi.html', 
                                             singlefare = check , 
                                             src=src, 
                                             dest=dest )
@@ -171,13 +208,45 @@ def search():
         srcdest = str(dest)+str(un)+str(src)
         check = fares.query.filter_by(srcdest = srcdest).all()
         if check != []:
-            return render_template('index.html', 
+            return render_template('kumasi.html', 
                                             singlefare = check , 
                                             src=src, 
                                             dest=dest )
         else:
             same = 'Sorry, the fare you are looking for cannot be found'
-            return render_template('index.html', same=same)
+            return render_template('kumasi.html', same=same)
+
+
+@app.route('/searchsefwi' , methods=['POST'])
+def searchsefwi():
+    src = request.form['src']
+    dest = request.form['dest']
+    if src == dest:
+        same = 'You chose the same location twice!'
+        return render_template('sefwi.html', same=same)
+    else:
+        un = str('_')
+        srcdest = str(src)+str(un)+str(dest)
+        check = sefwifares.query.filter_by(srcdest = srcdest).all()
+
+    if check != []:
+        return render_template('sefwi.html', 
+                                            singlefare = check , 
+                                            src=src, 
+                                            dest=dest )
+
+    else:
+        srcdest = str(dest)+str(un)+str(src)
+        check = fares.query.filter_by(srcdest = srcdest).all()
+        if check != []:
+            return render_template('sefwi.html', 
+                                            singlefare = check , 
+                                            src=src, 
+                                            dest=dest )
+        else:
+            same = 'Sorry, the fare you are looking for cannot be found'
+            return render_template('sefwi.html', same=same)
+        
 
 @app.route('/searchm' , methods=['POST'])
 @ensure_logged_in
@@ -281,4 +350,4 @@ def authorize():
 
 
 if __name__ == "__main__":
-    app.run(debug=False)    
+    app.run(debug=True)    
