@@ -198,9 +198,9 @@ a:hover{
 
 .form2{
   display: inline flex;
-  background-color: darkmagenta;
-  overflow: hidden;
   text-align: center;
+  overflow: hidden;
+  font-size: 18px;
 }
  .menuu{
    background-color: black;
