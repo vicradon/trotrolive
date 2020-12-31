@@ -162,7 +162,7 @@ a:hover{
    color: black;
  }
  .active, .menubar ul li:hover{
-   background: rgba(255, 0, 255, 0.212);
+   background: white;
    border-radius: 2px;
   }
   .submenu{
@@ -172,7 +172,7 @@ a:hover{
   {
     display: block;
     position: relative;
-    background-color: rgba(255, 0, 255, 0.212);;
+    background-color: white;
     margin-top: 10px;
     margin-left: 10px;
 
