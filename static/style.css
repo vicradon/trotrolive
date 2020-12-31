@@ -170,7 +170,7 @@ a:hover{
   .menubar ul li:hover .submenu
   {
     display: block;
-    position: absolute;
+    position: relative;
     background-color: white;
     margin-top: 10px;
     margin-left: 10px;
