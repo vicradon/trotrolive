@@ -43,7 +43,7 @@ body {
   text-align: center;
 }
 .sidebar{
-  position: relative;
+  position: absolute;
   float: left;
   left: 0;
   width: 200px;
