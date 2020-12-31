@@ -40,6 +40,7 @@
       </a>
       <div class="submenu">
          <ul>
+            <li><a href="/member">Member Page</a></li>
             <li><a href="/travel">General Travel</a></li>
             <li><a href="/health">Health Concerns</a></li>
             <li><a href="/safety">Safety Measures</a></li>
@@ -63,22 +64,32 @@
     {% endif %}
     <form action="signup" method="POST" name="form">
       <div>
-        <label>Email</label>
+        <label>Email*</label>
         <input type="email" name="email" id="email">
       </div>
       <br>
       <div>
-        <label>First Name</label>
+        <label>First Name*</label>
         <input type="text" name="fname" id="fname">
       </div>
       <br>
       <div>
-        <label>Last Name</label>
+        <label>Last Name*</label>
         <input type="text" name="lname" id="lname">
       </div>
       <br>
       <div>
-        <label>Gender</label>
+        <label>Phone Number*</label>
+        <input type="number" name="phonenum" id="phonenum">
+      </div>
+      <br>
+      <div>
+        <label>Digital Address</label>
+        <input type="text" name="digitaladd" id="digitaladd">
+      </div>
+      <br>
+      <div>
+        <label>Gender*</label>
         <select name="gender"> 
           <option value="male" id="gender">Male</option>
           <option value="female" id="gender">Female</option>
@@ -88,17 +99,17 @@
       <br>
 
       <div>
-        <label>Date of Birth</label>
+        <label>Date of Birth*</label>
         <input type="date" name="dob" id="dob">
       </div>
       <br>
       <div>
-        <label>Set Password</label>
+        <label>Set Password*</label>
         <input type="password" name="password" id="password">
       </div>
       <br>
       <div>
-        <label>Repeat Password</label>
+        <label>Repeat Password*</label>
         <input type="password" name="repassword" id="repassword">
       </div>
       <br>

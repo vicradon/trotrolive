@@ -40,6 +40,7 @@
       </a>
       <div class="submenu">
          <ul>
+            <li><a href="/member">Member Page</a></li>
             <li><a href="/travel">General Travel</a></li>
             <li><a href="/health">Health Concerns</a></li>
             <li><a href="/safety">Safety Measures</a></li>
@@ -85,7 +86,7 @@
    <div>  
       {% for singlefar in singlefare %} 
       <h3>Fare from {{ src }} to {{ dest }} is: </h3>         
-      <h2>GH₵ {{ singlefar.fare }}0 p {{ singlefar.transit }}</h2>
+      <b><h2 style="color: green;">GH₵ {{ singlefar.fare }}0 p {{ singlefar.transit }}</h2></b>
       {% endfor %}
    </div>
    <br>

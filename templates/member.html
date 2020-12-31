@@ -40,6 +40,7 @@
       </a>
       <div class="submenu">
          <ul>
+            <li><a href="/member">Member Page</a></li>
             <li><a href="/travel">General Travel</a></li>
             <li><a href="/health">Health Concerns</a></li>
             <li><a href="/safety">Safety Measures</a></li>
@@ -65,7 +66,7 @@
             {% if g.username %}
                <h3>{{ g.username.name }}'s Profile</h3>
             {% endif %}
-      </div><b><a href="/logout" style="color: red;"> Log out</a></b>
+      </div>
       <br>
          {% with messages = get_flashed_messages() %}
             {% if messages %}
@@ -76,7 +77,6 @@
                </ul>
             {% endif %}
          {% endwith %}
-<br>
 <div>
   <h3>{{same}}</h3>
 </div>
@@ -91,10 +91,11 @@
   </header>
 
 
-<br><br><br><br><br>
+<br>
 <div class="center"></div>
 <div class="form22">
-   <h2>Please select a city</h2>
+   You can help us keep our data up to date by <a href="/suggest">Suggesting a Fare</a>
+   <h2>Select a Providence</h2>
    <form action="/selectcity" method="POST">
    
    <label for='city'>City: </label>
@@ -107,6 +108,7 @@
    </select>
        <input type="submit", value="Next">
    <br>
+   <b><a href="/logout" style="color: red;"> Log out</a></b>
    </form>
     <br>
     <div>

@@ -50,6 +50,8 @@ class User(db.Model):
     email = db.Column(db.String(30), unique=True, nullable=False)
     fname = db.Column(db.String(15), unique=False, nullable=False)
     lname = db.Column(db.String(15), unique=False, nullable=False)
+    phonenum = db.Column(db.String(10), unique=True, nullable=False)
+    digitaladd = db.Column(db.String(10), unique=False, nullable=True)
     gender = db.Column(db.String(7), unique=False, nullable=False)
     dob = db.Column(db.String(10), unique=False, nullable=False)
     age = db.Column(db.String(4), unique=False, nullable=True)
@@ -173,12 +175,15 @@ def signup():
         new_gender = request.form['gender']
         new_dob = request.form['dob']
         new_pass = request.form['repassword']
+        new_phonenum = request.form['phonenum']
+        new_digitaladd = request.form['digitaladd']
 
         passcheck = request.form['password']
         user = User.query.filter_by(email=new_email).first()
+        phone = User.query.filter_by(phonenum=new_phonenum).first()
 
-        if user:
-            error = 'Email already exists'
+        if user or phone:
+            error = 'Account already exists'
         elif new_email == '':
             error = 'Email cannot be blank!'
         elif new_fname == '':
@@ -189,6 +194,8 @@ def signup():
             error = 'Please Enter a Date of Birth!'
         elif new_pass != passcheck:
             error = 'Passwords do not match. Please try again!'
+        elif new_phonenum == '':
+            error = 'Please Enter Your phone number!'
         else:
             hash_new_pass = generate_password_hash(new_pass, method='sha256')
             today = str(date.today())
@@ -213,7 +220,7 @@ def signup():
             else:
                 new_age = str(new_age)
             print(new_age)
-            new_user = User(email=new_email, fname=new_fname, lname=new_lname, gender=new_gender, dob=new_dob, passhash=hash_new_pass, age=new_age)
+            new_user = User(email=new_email, fname=new_fname, lname=new_lname, gender=new_gender, dob=new_dob, passhash=hash_new_pass, age=new_age, phonenum=new_phonenum, digitaladd=new_digitaladd)
             db.session.add(new_user)
             db.session.commit()
             flash('Account created Successfully. You can login now')
@@ -228,39 +235,47 @@ def login():
         old_email = request.form['email']
         passcheck = request.form['password']
         email = User.query.filter_by(email = old_email).first()
+        phone = User.query.filter_by(phonenum = old_email).first()
+        print(email)
+        print(phone)
         if not email or not check_password_hash(email.passhash, passcheck):
-            flash('Please check your login details and try again.')
-            return redirect(url_for('login'))
-        else:
-            session['user_id'] = email.id
-            age = email.age
-            gender = email.gender
-            if gender == "male":
-                if age <= "10":
-                    flash('Welcome Kiddo!, How are you?')
-                    return redirect(url_for('member'))
-                elif age <= "20":
-                    flash('Yo Bro, Sup!')
-                    return redirect(url_for('member'))
-                elif age <= "30":
-                    flash('Hi there young man, How was your day?')
-                    return redirect(url_for('member'))
-                else:
-                    flash('Agya!, How was your day?')
-                    return redirect(url_for('member'))
+            if not phone or not check_password_hash(phone.passhash, passcheck):
+                flash('Please check your login details and try again.')
+                return redirect(url_for('login'))
+    
+        print(email)
+        print(phone)
+        if phone:
+            email = phone
+        session['user_id'] = email.id
+        age = email.age
+        gender = email.gender
+        if gender == "male":
+            if age <= "10":
+                flash('Welcome Kiddo!, How are you?')
+                return redirect(url_for('member'))
+            elif age <= "20":
+                flash('Yo Bro, Sup!')
+                return redirect(url_for('member'))
+            elif age <= "30":
+                flash('Hi there young man, How was your day?')
+                return redirect(url_for('member'))
             else:
-                if age <= "10":
-                    flash('Welcome Princess!, How are you?')
-                    return redirect(url_for('member'))
-                elif age <= "20":
-                    flash('Hello Ohemaa, Woho te sen?')
-                    return redirect(url_for('member'))
-                elif age <= "30":
-                    flash('Hi there Obaapa, How was your day?')
-                    return redirect(url_for('member'))
-                else:
-                    flash('Ena!, Akwaaba, How was your day?')
-                    return redirect(url_for('member'))
+                flash('Agya!, How was your day?')
+                return redirect(url_for('member'))
+        else:
+            if age <= "10":
+                flash('Welcome Princess!, How are you?')
+                return redirect(url_for('member'))
+            elif age <= "20":
+                flash('Hello Ohemaa, Woho te sen?')
+                return redirect(url_for('member'))
+            elif age <= "30":
+                flash('Hi there Obaapa, How was your day?')
+                return redirect(url_for('member'))
+            else:
+                flash('Ena!, Akwaaba, How was your day?')
+                return redirect(url_for('member'))
 
     return render_template('login.html')
 
