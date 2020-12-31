@@ -7,6 +7,7 @@ from flask_login import login_manager
 from functools import wraps
 import json
 from authlib.integrations.flask_client import OAuth
+from datetime import date
 
 
 old_email = ''
@@ -51,6 +52,7 @@ class User(db.Model):
     lname = db.Column(db.String(15), unique=False, nullable=False)
     gender = db.Column(db.String(7), unique=False, nullable=False)
     dob = db.Column(db.String(10), unique=False, nullable=False)
+    age = db.Column(db.String(4), unique=False, nullable=True)
     passhash = db.Column(db.String(180), unique=False, nullable=False)
 
     #def __repr__(self):
@@ -189,7 +191,29 @@ def signup():
             error = 'Passwords do not match. Please try again!'
         else:
             hash_new_pass = generate_password_hash(new_pass, method='sha256')
-            new_user = User(email=new_email, fname=new_fname, lname=new_lname, gender=new_gender, dob=new_dob, passhash=hash_new_pass)
+            today = str(date.today())
+            dob = str("1999-12-15")
+
+            todaylst = today.split('-')
+            todayrest = str(todaylst[1])
+            todayrestlst = todayrest.split('-')
+            todaymonth = str(todayrestlst[0])
+            todayyear = str(todaylst[0])
+
+            doblst = dob.split('-')
+            dobrest = str(doblst[1])
+            dobrestlst = dobrest.split('-')
+            dobmonth = str(dobrestlst[0])
+            dobyear = str(doblst[0])
+
+            new_age = int(todayyear)-int(dobyear)
+            if dobmonth > todaymonth:
+                new_age = new_age-1
+                new_age = str(new_age)
+            else:
+                new_age = str(new_age)
+            print(new_age)
+            new_user = User(email=new_email, fname=new_fname, lname=new_lname, gender=new_gender, dob=new_dob, passhash=hash_new_pass, age=new_age)
             db.session.add(new_user)
             db.session.commit()
             flash('Account created Successfully. You can login now')
@@ -209,8 +233,34 @@ def login():
             return redirect(url_for('login'))
         else:
             session['user_id'] = email.id
-            flash('Welcome '+ old_email+'!')
-            return redirect(url_for('member'))
+            age = email.age
+            gender = email.gender
+            if gender == "male":
+                if age <= "10":
+                    flash('Welcome Kiddo!, How are you?')
+                    return redirect(url_for('member'))
+                elif age <= "20":
+                    flash('Yo Bro, Sup!')
+                    return redirect(url_for('member'))
+                elif age <= "30":
+                    flash('Hi there young man, How was your day?')
+                    return redirect(url_for('member'))
+                else:
+                    flash('Agya!, How was your day?')
+                    return redirect(url_for('member'))
+            else:
+                if age <= "10":
+                    flash('Welcome Princess!, How are you?')
+                    return redirect(url_for('member'))
+                elif age <= "20":
+                    flash('Hello Ohemaa, Woho te sen?')
+                    return redirect(url_for('member'))
+                elif age <= "30":
+                    flash('Hi there Obaapa, How was your day?')
+                    return redirect(url_for('member'))
+                else:
+                    flash('Ena!, Akwaaba, How was your day?')
+                    return redirect(url_for('member'))
 
     return render_template('login.html')
 
@@ -440,4 +490,5 @@ def authorize():
 
 
 if __name__ == "__main__":
+    db.create_all()
     app.run(debug=True)    
