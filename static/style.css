@@ -85,6 +85,7 @@ transition: .4s;
  .banner2{
    width: 120px;
    height: 90px;
+   padding-top: 1px
  } 
  .maintext{
    font-size: 20px;
